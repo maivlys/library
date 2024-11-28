@@ -9,8 +9,7 @@ p, h1, h2{
 :root{
   --main-clr: #C9B9EB;
   --dark-main-clr: #756596;
-  --contrast-clr: #376B5C;
-  --contrast-clr-hover: #2a5549;
+  --dark-main-hover: #574a70;
   --read-clr: #B9EBDC;
   --reading-clr: #EBE7B9;
   --not-read-clr: #EBC4B9;
@@ -109,8 +108,16 @@ p.status,
 }
 p.status{
   margin-top: var(--big-gap);
-  background-color: var(--reading-clr);
   color: rgb(61, 61, 61);
+}
+.read{
+  background-color: var(--read-clr);
+}
+.reading{
+  background-color: var(--reading-clr);
+}
+.not-read{
+  background-color: var(--not-read-clr);
 }
 dialog {
   position: fixed;
@@ -118,14 +125,16 @@ dialog {
   left: 50%;
   transform: translate(-50%, -50%);
   border: none;
-  border-left: 6px solid var(--contrast-clr);
+  border-left: 10px solid var(--dark-main-clr);
   border-radius: 0 30px 0 30px;
   box-shadow: var(--shadow);
   padding: 20px;
   width: 300px;
+  background-color: rgba(255, 255, 255, 0.89);
+  opacity: 0.9;
 }
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
 }
 #user-input{
   display: flex;
@@ -142,7 +151,7 @@ dialog::backdrop {
   color: rgb(59, 59, 59);
 }
 #user-input input:focus:not(#status-input input){
-  outline: 1px solid var(--contrast-clr);
+  outline: 1px solid var(--dark-main-clr);
 }
 #status-input{
   display: flex;
@@ -152,15 +161,15 @@ dialog::backdrop {
 }
 #status-input input{
   margin-right: 10px;
-  accent-color: var(--contrast-clr);
+  accent-color: var(--dark-main-clr);
 }
 #submit-btn{
-  background-color: var(--contrast-clr);
+  background-color: var(--dark-main-clr);
   color: white;
   will-change: transform;
 }
 #submit-btn:hover{
-  background-color: var(--contrast-clr-hover);
+  background-color: var(--dark-main-hover);
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
 }
