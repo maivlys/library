@@ -1,0 +1,164 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+p, h1, h2{
+  cursor: default;
+}
+:root{
+  --main-clr: #C9B9EB;
+  --dark-main-clr: #756596;
+  --contrast-clr: #376B5C;
+  --contrast-clr-hover: #2a5549;
+  --read-clr: #B9EBDC;
+  --reading-clr: #EBE7B9;
+  --not-read-clr: #EBC4B9;
+  --big-gap: 28px;
+  --small-gap: 20px;
+  --padding-rect: 8px 12px;
+  --shadow: 4px 4px 4px rgba(0, 0, 0, 0.082);
+}
+html, body{
+  height: 100vh
+}
+#flex-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 4rem 10rem;
+}
+header{
+  display: flex;
+  gap: var(--big-gap);
+  min-width: 252px;
+}
+h1{
+  color: black;
+}
+#add-book-btn{
+  padding: 10px 16px;
+  background-color: var(--main-clr);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.25rem;
+  cursor: pointer;
+  will-change: transfrom;
+}
+#add-book-btn:hover{
+  background-color: var(--dark-main-clr);
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+main#books-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 305px);
+  gap: var(--big-gap);
+  padding: var(--big-gap);
+  width: 100%;
+}
+.book-item{
+  background-color: rgba(196, 196, 224, 0.123);
+  padding: var(--small-gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+  border-left: 6px solid var(--main-clr);
+  border-radius: 0 30px 0 30px;
+  box-shadow: var(--shadow);
+}
+.one-line-position{
+  display: grid;
+  grid-template-columns: auto 30px;
+  gap: var(--big-gap);
+  align-items: flex-start;
+}
+.book-item div h2 {
+  white-space: normal; /
+}
+.bin-btn,
+.bin-btn svg{
+  justify-self: flex-end;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--main-clr);
+  will-change: transform;
+}
+.bin-btn svg:hover{
+  color: var(--dark-main-clr);
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+.status-line{
+  grid-template-columns: 120px auto;
+}
+p.status,
+#submit-btn{
+  align-self: end;
+  justify-self: end;
+  padding: var(--padding-rect);
+  border-radius: 0 15px 0 15px;
+  border: none;
+  cursor: pointer;
+}
+p.status{
+  margin-top: var(--big-gap);
+  background-color: var(--reading-clr);
+  color: rgb(61, 61, 61);
+}
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-left: 6px solid var(--contrast-clr);
+  border-radius: 0 30px 0 30px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  width: 300px;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+#user-input{
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+  padding: var(--padding-rect);
+}
+#user-input input{
+  padding: var(--padding-rect);
+  border-radius: 0 10px 0 10px;
+  border: 1px solid rgb(59, 59, 59);
+}
+#user-input input::placeholder{
+  color: rgb(59, 59, 59);
+}
+#user-input input:focus:not(#status-input input){
+  outline: 1px solid var(--contrast-clr);
+}
+#status-input{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+#status-input input{
+  margin-right: 10px;
+  accent-color: var(--contrast-clr);
+}
+#submit-btn{
+  background-color: var(--contrast-clr);
+  color: white;
+  will-change: transform;
+}
+#submit-btn:hover{
+  background-color: var(--contrast-clr-hover);
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
