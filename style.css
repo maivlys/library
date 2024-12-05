@@ -153,6 +153,10 @@ dialog::backdrop {
 #user-input input:focus:not(#status-input input){
   outline: 1px solid var(--dark-main-clr);
 }
+#pgs-input::-webkit-inner-spin-button,
+#pgs-input::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+}
 #status-input{
   display: flex;
   flex-direction: column;

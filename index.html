@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <title>Library</title>
   </head>
   <body>
@@ -13,86 +14,7 @@
         <button id="add-book-btn">+</button>
       </header>
       <main id="books-container">
-        <!-- <section class="book-item">
-          <div class="one-line-position">
-            <h2>Harry Potter and the Deathly Hallows</h2>
-            <button class="bin-btn">
-              <svg
-                width="25"
-                height="25"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.979 4.5H15.75V2.25A.75.75 0 0 0 15 1.5H9a.75.75 0 0 0-.75.75V4.5H3.021L3 6.375h1.547l.942 14.719A1.5 1.5 0 0 0 6.984 22.5h10.032a1.5 1.5 0 0 0 1.496-1.404l.941-14.721H21L20.979 4.5ZM8.25 19.5l-.422-12h1.547l.422 12H8.25Zm4.5 0h-1.5v-12h1.5v12Zm1.125-15h-3.75V3.187A.188.188 0 0 1 10.313 3h3.374a.188.188 0 0 1 .188.188V4.5Zm1.875 15h-1.547l.422-12h1.547l-.422 12Z"
-                ></path>
-              </svg>
-            </button>
-          </div>
-
-          <p class="author">Author: J. K. Rowling</p>
-          <p class="pages">Pages: 784</p>
-          <div class="one-line-position status-line">
-            <span></span>
-            <p class="status">Now reading</p>
-          </div>
-        </section> -->
-        <section class="book-item">
-          <div class="one-line-position">
-            <h2>Rýchlokurz geniality</h2>
-            <button class="bin-btn">
-              <svg
-                width="25"
-                height="25"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.979 4.5H15.75V2.25A.75.75 0 0 0 15 1.5H9a.75.75 0 0 0-.75.75V4.5H3.021L3 6.375h1.547l.942 14.719A1.5 1.5 0 0 0 6.984 22.5h10.032a1.5 1.5 0 0 0 1.496-1.404l.941-14.721H21L20.979 4.5ZM8.25 19.5l-.422-12h1.547l.422 12H8.25Zm4.5 0h-1.5v-12h1.5v12Zm1.125-15h-3.75V3.187A.188.188 0 0 1 10.313 3h3.374a.188.188 0 0 1 .188.188V4.5Zm1.875 15h-1.547l.422-12h1.547l-.422 12Z"
-                ></path>
-              </svg>
-            </button>
-          </div>
-
-          <p class="author">Author: Ľudovít Ódor</p>
-          <p class="pages-p">Pages: <span class="pages">168</span></p>
-          <div class="one-line-position status-line">
-            <span></span>
-            <p class="status reading">Reading</p>
-          </div>
-        </section>
-        <section class="book-item">
-          <div class="one-line-position">
-            <h2>Kiss That Frog!</h2>
-            <button class="bin-btn">
-              <svg
-                width="25"
-                height="25"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.979 4.5H15.75V2.25A.75.75 0 0 0 15 1.5H9a.75.75 0 0 0-.75.75V4.5H3.021L3 6.375h1.547l.942 14.719A1.5 1.5 0 0 0 6.984 22.5h10.032a1.5 1.5 0 0 0 1.496-1.404l.941-14.721H21L20.979 4.5ZM8.25 19.5l-.422-12h1.547l.422 12H8.25Zm4.5 0h-1.5v-12h1.5v12Zm1.125-15h-3.75V3.187A.188.188 0 0 1 10.313 3h3.374a.188.188 0 0 1 .188.188V4.5Zm1.875 15h-1.547l.422-12h1.547l-.422 12Z"
-                ></path>
-              </svg>
-            </button>
-          </div>
-
-          <p class="author-p">
-            Author:
-            <span class="author">Brian Tracy, Christina Tracy Stein</span>
-          </p>
-          <p class="pages-p">Pages: <span class="pages">168</span></p>
-          <div class="one-line-position status-line">
-            <span></span>
-            <p class="status read">Read</p>
-          </div>
-        </section>
-      </main>
-    </div>
+        <p id="initial-msg">No books yet</p>
 
     <dialog id="dialog-form" >
       <div>
@@ -100,7 +22,7 @@
           <h3>Add a new book to your list</h3>
           <input type="text" id="title-input" placeholder="Title" required/>
           <input type="text" id="author-input" placeholder="Author" required />
-          <input type="text" id="pgs-input" placeholder="Pages"  required/>
+          <input type="number" id="pgs-input" placeholder="Pages" min="1" required/>
           <div id="status-input">
             <label for="read"><input type="radio" id="read" name="reading-status" value="read"/>Read</label>
            <label for="reading"> <input type="radio" id="reading" name="reading-status" value="reading" />Reading now</label>
@@ -112,6 +34,6 @@
 
     </dialog>
 
-    <script src="app.js"></script>
+    <script src="app2.js"></script>
   </body>
 </html>
