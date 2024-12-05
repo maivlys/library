@@ -1,30 +1,37 @@
-let storedBooks;
+// let storedBooks;
 let bookTitle;
 let bookAuthor;
 let numOfPages;
 let option;
 let statuss;
+let cnt;
 let msg;
 let book;
+let myBooks;
+const initialMsg = document.getElementById("initial-msg");
 
 window.onload = function () {
   if (localStorage.getItem("mybooks") !== null) {
-    storedBooks = JSON.parse(localStorage.getItem("mybooks"));
-    storedBooks.forEach((el) => {
+    myBooks = JSON.parse(localStorage.getItem("mybooks"));
+    cnt = myBooks.length;
+    myBooks.forEach((el) => {
       createUI(el);
     });
+  } else {
+    initialMsg.textContent = "😭 No books here... yet! 😍 ";
+    myBooks = [];
+    cnt = 0;
   }
 };
 
 // --- Array of Books & Constructor ---
-let myBooks = [];
 
-function Book(title, author, pages, status) {
+function Book(title, author, pages, status, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.status = status;
-  // this, (index = index);
+  this.id = id;
 }
 
 // --- Open Dialog ---
@@ -67,8 +74,9 @@ function createUI(object) {
 
   section.innerHTML = `<div class="one-line-position">
             <h2>${object.title}</h2>
-            <button id="bin-btn" class="bin-btn">
+            <button class="bin-btn" id="${object.id}">
               <svg
+                id="${object.id}"
                 width="25"
                 height="25"
                 fill="currentColor"
@@ -76,6 +84,7 @@ function createUI(object) {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  id="${object.id}"
                   d="M20.979 4.5H15.75V2.25A.75.75 0 0 0 15 1.5H9a.75.75 0 0 0-.75.75V4.5H3.021L3 6.375h1.547l.942 14.719A1.5 1.5 0 0 0 6.984 22.5h10.032a1.5 1.5 0 0 0 1.496-1.404l.941-14.721H21L20.979 4.5ZM8.25 19.5l-.422-12h1.547l.422 12H8.25Zm4.5 0h-1.5v-12h1.5v12Zm1.125-15h-3.75V3.187A.188.188 0 0 1 10.313 3h3.374a.188.188 0 0 1 .188.188V4.5Zm1.875 15h-1.547l.422-12h1.547l-.422 12Z"
                 ></path>
               </svg>
@@ -88,12 +97,13 @@ function createUI(object) {
           }</span></p>
           <div class="one-line-position status-line">
             <span></span>
-            <p class="status ${object.status}" id="status-btn">${createMsg(
+            <p class="status ${object.status}" id="${object.id}">${createMsg(
     object.status
   )}</p>
           </div>`;
 
   booksContainer.prepend(section);
+  initialMsg.textContent = "";
   changeStatusOption();
   deleteSectionOption();
 }
@@ -110,9 +120,10 @@ function createObject() {
   option = document.querySelector('input[name="reading-status"]:checked');
   statuss = option.value;
 
-  book = new Book(bookTitle, bookAuthor, numOfPages, statuss);
+  book = new Book(bookTitle, bookAuthor, numOfPages, statuss, cnt);
   myBooks.push(book);
 
+  cnt++;
   saveToLocalStorage();
 }
 
@@ -124,57 +135,51 @@ function createMsg(status) {
 }
 
 function changeStatusOption() {
-  let btn = document.getElementById("status-btn");
+  let btn = document.querySelector(".status");
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    const clickedId = parseInt(e.target.id);
+
     if (btn.textContent === "Not read") {
       btn.textContent = "Reading";
       btn.classList.remove("not-read");
       btn.classList.add("reading");
+      myBooks[clickedId].status = "reading";
     } else if (btn.textContent === "Reading") {
       btn.textContent = "Read";
       btn.classList.remove("reading");
       btn.classList.add("read");
+      myBooks[clickedId].status = "read";
     } else if (btn.textContent === "Read") {
       btn.textContent = "Not read";
       btn.classList.remove("read");
       btn.classList.add("not-read");
+      myBooks[clickedId].status = "not-read";
     }
-
-    // statusBtn.forEach((btn) => {
-    //   btn.addEventListener("click", () => {
-    //     if (btn.textContent === "Not read") {
-    //       btn.textContent = "Reading";
-    //       btn.classList.remove("not-read");
-    //       btn.classList.add("reading");
-    //     } else if (btn.textContent === "Reading") {
-    //       btn.textContent = "Read";
-    //       btn.classList.remove("reading");
-    //       btn.classList.add("read");
-    //     } else if (btn.textContent === "Read") {
-    //       btn.textContent = "Not read";
-    //       btn.classList.remove("read");
-    //       btn.classList.add("not-read");
-    //     }
-    //   });
 
     saveToLocalStorage();
   });
 }
 
 function deleteSectionOption() {
-  let btn = document.getElementById("bin-btn");
+  let btn = document.querySelector(".bin-btn");
 
-  btn.addEventListener("click", () => {
-    let section = btn.closest("section");
-    section.remove();
+  btn.addEventListener("click", (e) => {
+    const clickedId = parseInt(e.target.id);
 
-    // deleteBookBtn.forEach((btn) => {
-    //   btn.addEventListener("click", () => {
-    //     let section = btn.closest("section");
-    //     section.remove();
-    //   });
-    // });
+    myBooks.splice(clickedId, 1);
+
+    let sections = document.querySelectorAll(".book-item");
+    sections.forEach((el) => el.remove());
+    for (let i = 0; i < myBooks.length; i++) {
+      myBooks[i].id = i;
+    }
+
+    myBooks.forEach((el) => {
+      createUI(el);
+    });
+    cnt = myBooks.length;
+    saveToLocalStorage();
   });
 }
 
